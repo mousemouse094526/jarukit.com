@@ -33,6 +33,12 @@ export default defineConfig({
     vercel(),
   ],
 
+  resolve: {
+    alias: {
+      '@': __dirname,
+    },
+  },
+
   vercel: {
     additionalEndpoints: [
       {

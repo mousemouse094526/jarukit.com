@@ -1,15 +1,16 @@
 import { AppShell, Burger, Group, Image, MantineProvider } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import logoUrl from '../assets/logo.svg'
-import { Link } from '../components/Link'
-
+import logoUrl from '@/src/assets/logo.svg'
+import { Link } from '@/src/components/Link'
 import theme from './theme.js'
+
+import './global.css'
 import '@mantine/core/styles.css'
 
-export default function LayoutDefault({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure()
   return (
-    <MantineProvider theme={theme}>
+    <MantineProvider theme={theme} defaultColorScheme="dark">
       <AppShell
         header={{ height: 60 }}
         navbar={{ breakpoint: 'sm', collapsed: { mobile: !opened }, width: 300 }}
@@ -27,7 +28,6 @@ export default function LayoutDefault({ children }: { children: React.ReactNode 
         </AppShell.Header>
         <AppShell.Navbar p="md">
           <Link href="/" label="Welcome" />
-          <Link href="/todo" label="Todo" />
         </AppShell.Navbar>
         <AppShell.Main>
           {' '}

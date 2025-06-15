@@ -2,9 +2,9 @@ import { createHandler, createMiddleware } from '@universal-middleware/hono'
 
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
-import { authjsHandler, authjsSessionMiddleware } from './server/authjs-handler'
-import { telefuncHandler } from './server/telefunc-handler'
-import { vikeHandler } from './server/vike-handler'
+import { authjsHandler, authjsSessionMiddleware } from '@/src/server/authjs-handler'
+import { telefuncHandler } from '@/src/server/telefunc-handler'
+import { vikeHandler } from '@/src/server/vike-handler'
 
 const app = new Hono()
 

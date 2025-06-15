@@ -2,7 +2,7 @@ import type { MantineThemeOverride } from '@mantine/core'
 import { createTheme } from '@mantine/core'
 
 const theme: MantineThemeOverride = createTheme({
-  /** Put your mantine theme override here */
+  fontFamily: 'Kanit, sans-serif',
   primaryColor: 'violet',
 })
 
