@@ -1,10 +1,15 @@
 {
   "name": "jarukit.com",
   "type": "module",
+  "prisma": {
+    "schema": "./prisma",
+    "seed": "bun prisma/seeds/index.ts"
+  },
   "scripts": {
     "prepare": "bun .husky/install.mjs",
+    "postinstall": "bun run prisma:generate",
     "______________app_scripts______________": "",
-    "dev": "dotenvx run -f .env -- vike dev",
+    "dev": "dotenvx run -f .env -- cross-env VITE_CJS_TRACE=true vike dev",
     "build": "dotenvx run -f $(bun run env:file) -- vike build",
     "preview": "dotenvx run -f $(bun run env:file) -- cross-env NODE_ENV=production tsx ./hono-entry.node.ts",
     "lint": "eslint . --max-warnings=0",
@@ -14,8 +19,12 @@
     "env:ec": "dotenvx encrypt -f .env && dotenvx encrypt -f .env.production",
     "env:dc": "dotenvx decrypt -f .env && dotenvx decrypt -f .env.production",
     "____________prisma_scripts____________": "",
-    "prisma:studio": "prisma studio",
-    "prisma:generate": "prisma generate"
+    "prisma:studio": "dotenvx run -f .env -- prisma studio",
+    "prisma:generate": "dotenvx run -f .env -- prisma generate --no-engine",
+    "prisma:validate": "dotenvx run -f .env -- prisma validate",
+    "prisma:migrate": "dotenvx run -f .env -- prisma migrate dev --skip-seed",
+    "prisma:reset": "dotenvx run -f .env -- prisma migrate reset --force",
+    "prisma:seed": "dotenvx run -f .env -- prisma db seed"
   },
   "dependencies": {
     "@auth/core": "^0.39.1",
@@ -23,7 +32,6 @@
     "@hono/node-server": "^1.14.4",
     "@mantine/core": "^8.0.2",
     "@mantine/hooks": "^8.0.2",
-    "@prisma/client": "^6.9.0",
     "@prisma/extension-accelerate": "^2.0.1",
     "@universal-middleware/core": "^0.4.7",
     "@universal-middleware/hono": "^0.4.12",
